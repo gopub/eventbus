@@ -1,7 +1,7 @@
 eventbus
 ======
 
-[![GoDoc](https://godoc.org/github.com/asaskevich/eventbus?status.svg)](https://godoc.org/github.com/asaskevich/eventbus) [![Coverage Status](https://img.shields.io/coveralls/asaskevich/eventbus.svg)](https://coveralls.io/r/asaskevich/eventbus?branch=master) [![Build Status](https://travis-ci.org/asaskevich/eventbus.svg)](https://travis-ci.org/asaskevich/eventbus)
+[![GoDoc](https://godoc.org/github.com/gopub/eventbus?status.svg)](https://godoc.org/github.com/gopub/eventbus) [![Coverage Status](https://img.shields.io/coveralls/gopub/eventbus.svg)](https://coveralls.io/r/gopub/eventbus?branch=master) [![Build Status](https://travis-ci.org/gopub/eventbus.svg)](https://travis-ci.org/gopub/eventbus)
 
 Package eventbus is the little and lightweight eventbus with async compatibility for GoLang.
 
@@ -9,19 +9,19 @@ Package eventbus is the little and lightweight eventbus with async compatibility
 Make sure that Go is installed on your computer.
 Type the following command in your terminal:
 
-	go get github.com/asaskevich/eventbus
+	go get github.com/gopub/eventbus
 
 After it the package is ready to use.
 
 #### Import package in your project
 Add following line in your `*.go` file:
 ```go
-import "github.com/asaskevich/eventbus"
+import "github.com/gopub/eventbus"
 ```
 If you unhappy to use long `eventbus`, you can do something like this:
 ```go
 import (
-	evbus "github.com/asaskevich/eventbus"
+	evbus "github.com/gopub/eventbus"
 )
 ```
 
@@ -148,13 +148,13 @@ func main() {
 ```
 
 #### Notes
-Documentation is available here: [godoc.org](https://godoc.org/github.com/asaskevich/eventbus).
-Full information about code coverage is also available here: [eventbus on gocover.io](http://gocover.io/github.com/asaskevich/eventbus).
+Documentation is available here: [godoc.org](https://godoc.org/github.com/gopub/eventbus).
+Full information about code coverage is also available here: [eventbus on gocover.io](http://gocover.io/github.com/gopub/eventbus).
 
 #### Support
 If you do have a contribution for the package feel free to put up a Pull Request or open Issue.
 
-#### Special thanks to [contributors](https://github.com/asaskevich/eventbus/graphs/contributors)
+#### Special thanks to [contributors](https://github.com/gopub/eventbus/graphs/contributors)
 * [Brian Downs](https://github.com/briandowns)
 * [Dominik Schulz](https://github.com/gittex)
 * [bennAH](https://github.com/bennAH)
