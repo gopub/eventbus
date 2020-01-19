@@ -8,7 +8,7 @@ import (
 func TestNew(t *testing.T) {
 	bus := New()
 	if bus == nil {
-		t.Log("New eventbus not created!")
+		t.Log("New EventBus not created!")
 		t.Fail()
 	}
 }

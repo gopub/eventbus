@@ -53,7 +53,7 @@ func NewServer(address, path string, eventBus Bus) *Server {
 	return server
 }
 
-// eventbus - returns wrapped event bus
+// EventBus - returns wrapped event bus
 func (server *Server) EventBus() Bus {
 	return server.eventBus
 }

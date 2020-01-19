@@ -32,7 +32,7 @@ func NewNetworkBus(address, path string) *NetworkBus {
 	return bus
 }
 
-// eventbus - returns wrapped event bus
+// EventBus - returns wrapped event bus
 func (networkBus *NetworkBus) EventBus() Bus {
 	return networkBus.sharedBus
 }

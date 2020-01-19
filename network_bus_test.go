@@ -8,7 +8,7 @@ func TestNewServer(t *testing.T) {
 	serverBus := NewServer(":2010", "/_server_bus_", New())
 	serverBus.Start()
 	if serverBus == nil || !serverBus.service.started {
-		t.Log("New server eventbus not created!")
+		t.Log("New server EventBus not created!")
 		t.Fail()
 	}
 	serverBus.Stop()
@@ -18,7 +18,7 @@ func TestNewClient(t *testing.T) {
 	clientBus := NewClient(":2015", "/_client_bus_", New())
 	clientBus.Start()
 	if clientBus == nil || !clientBus.service.started {
-		t.Log("New client eventbus not created!")
+		t.Log("New client EventBus not created!")
 		t.Fail()
 	}
 	clientBus.Stop()
