@@ -1,8 +1,8 @@
-package EventBus
+package eventbus
 
 import (
 	"errors"
-	"fmt"
+	"log"
 	"net"
 	"net/http"
 	"net/rpc"
@@ -53,7 +53,7 @@ func NewServer(address, path string, eventBus Bus) *Server {
 	return server
 }
 
-// EventBus - returns wrapped event bus
+// eventbus - returns wrapped event bus
 func (server *Server) EventBus() Bus {
 	return server.eventBus
 }
@@ -63,7 +63,7 @@ func (server *Server) rpcCallback(subscribeArg *SubscribeArg) func(args ...inter
 		client, connErr := rpc.DialHTTPPath("tcp", subscribeArg.ClientAddr, subscribeArg.ClientPath)
 		defer client.Close()
 		if connErr != nil {
-			fmt.Errorf("dialing: %v", connErr)
+			log.Fatalf("DialHTTPPath: %v", connErr)
 		}
 		clientArg := new(ClientArg)
 		clientArg.Topic = subscribeArg.Topic
@@ -71,7 +71,7 @@ func (server *Server) rpcCallback(subscribeArg *SubscribeArg) func(args ...inter
 		var reply bool
 		err := client.Call(subscribeArg.ServiceMethod, clientArg, &reply)
 		if err != nil {
-			fmt.Errorf("dialing: %v", err)
+			log.Fatalf("Call: %v", err)
 		}
 	}
 }
@@ -90,24 +90,21 @@ func (server *Server) HasClientSubscribed(arg *SubscribeArg) bool {
 
 // Start - starts a service for remote clients to subscribe to events
 func (server *Server) Start() error {
-	var err error
 	service := server.service
-	if !service.started {
-		rpcServer := rpc.NewServer()
-		rpcServer.Register(service)
-		rpcServer.HandleHTTP(server.path, "/debug"+server.path)
-		l, e := net.Listen("tcp", server.address)
-		if e != nil {
-			err = e
-			fmt.Errorf("listen error: %v", e)
-		}
-		service.started = true
-		service.wg.Add(1)
-		go http.Serve(l, nil)
-	} else {
-		err = errors.New("Server bus already started")
+	if service.started {
+		return errors.New("server bus already started")
 	}
-	return err
+	rpcServer := rpc.NewServer()
+	rpcServer.Register(service)
+	rpcServer.HandleHTTP(server.path, "/debug"+server.path)
+	l, err := net.Listen("tcp", server.address)
+	if err != nil {
+		log.Fatalf("Listen: %v", err)
+	}
+	service.started = true
+	service.wg.Add(1)
+	go http.Serve(l, nil)
+	return nil
 }
 
 // Stop - signal for the service to stop serving

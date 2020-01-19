@@ -1,8 +1,9 @@
-package EventBus
+package eventbus
 
 import (
 	"errors"
 	"fmt"
+	"log"
 	"net"
 	"net/http"
 	"net/rpc"
@@ -53,13 +54,13 @@ func (client *Client) doSubscribe(topic string, fn interface{}, serverAddr, serv
 	rpcClient, err := rpc.DialHTTPPath("tcp", serverAddr, serverPath)
 	defer rpcClient.Close()
 	if err != nil {
-		fmt.Errorf("dialing: %v", err)
+		log.Fatalf("DialHTTPPath: %v", err)
 	}
 	args := &SubscribeArg{client.address, client.path, PublishService, subscribeType, topic}
 	reply := new(bool)
 	err = rpcClient.Call(RegisterService, args, reply)
 	if err != nil {
-		fmt.Errorf("Register error: %v", err)
+		log.Fatalf("Register error: %v", err)
 	}
 	if *reply {
 		client.eventBus.Subscribe(topic, fn)
@@ -88,8 +89,8 @@ func (client *Client) Start() error {
 		if err == nil {
 			service.wg.Add(1)
 			service.started = true
-			go http.Serve(l, nil)	
-		}	
+			go http.Serve(l, nil)
+		}
 	} else {
 		err = errors.New("Client service already started")
 	}

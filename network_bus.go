@@ -1,4 +1,4 @@
-package EventBus
+package eventbus
 
 import (
 	"errors"
@@ -32,7 +32,7 @@ func NewNetworkBus(address, path string) *NetworkBus {
 	return bus
 }
 
-// EventBus - returns wrapped event bus
+// eventbus - returns wrapped event bus
 func (networkBus *NetworkBus) EventBus() Bus {
 	return networkBus.sharedBus
 }
