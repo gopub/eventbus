@@ -48,6 +48,8 @@ type eventHandler struct {
 	sync.Mutex    // lock for an event handler - useful for running async callbacks serially
 }
 
+var Default = New()
+
 // New returns new EventBus with empty handlers.
 func New() Bus {
 	b := &EventBus{
